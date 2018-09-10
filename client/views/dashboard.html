@@ -181,10 +181,10 @@
                   <hr>
                   <p class="card-text">Description: ${todo.description}</p>
                   <p class="card-text">Due Date: ${date.getDate()}/${date.getMonth()}/${date.getFullYear()}</p>
-                  <a href="#" class="btn-sm btn-info" onClick="update('${todo._id}', '${todo.name}', '${todo.description}', '${todo.dueDate}')" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">EDIT</a>
-                  <a href="#" class="btn-sm btn-danger" onClick="removeTodo('${todo._id}')">DELETE</a>
-                  <a href="#" class="btn-sm btn-success" onClick="completed('${todo._id}')" >V</a>
-                  <a href="#" class="btn-sm btn-warning" onClick="completed('${todo._id}')" >X</a>
+                  <a href="JavaScript:Void(0)" class="btn-sm btn-info" onClick="update('${todo._id}', '${todo.name}', '${todo.description}', '${todo.dueDate}')" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">EDIT</a>
+                  <a href="JavaScript:Void(0)" class="btn-sm btn-danger" onClick="removeTodo('${todo._id}')">DELETE</a>
+                  <a href="JavaScript:Void(0)" class="btn-sm btn-success" onClick="done('${todo._id}')" >V</a>
+                  <a href="JavaScript:Void(0)" class="btn-sm btn-warning" onClick="undone('${todo._id}')" >X</a>
                 </div>
               </div>
               
@@ -276,6 +276,13 @@
       localStorage.removeItem('name');
       localStorage.removeItem('userId');
       window.location.href = 'index.html'
+    }
+
+    function done(id) {
+      $.ajax({
+        method: 'put',
+        url: `http://localhost:3013/todo/completed/${id}`,
+      })
     }
 
     
