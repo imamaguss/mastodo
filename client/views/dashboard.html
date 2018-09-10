@@ -8,17 +8,23 @@
   <title>masTODO - Dashboard</title>
 
   <!-- Bootstrap CDN -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"crossorigin="anonymous">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"crossorigin="anonymous"></script>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl"crossorigin="anonymous"></script>
-  
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl"
+    crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style.css">
 
   <!-- Font Awesome JS -->
-  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"crossorigin="anonymous"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+    crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+    crossorigin="anonymous"></script>
 
 </head>
 
@@ -38,9 +44,21 @@
         <li data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
           <a href="#">Add Tasks</a>
         </li>
+
         <li>
           <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Filter By</a>
           <ul class="collapse list-unstyled" id="pageSubmenu">
+            <li>
+              <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Completed/Uncompleted</a>
+              <ul class="collapse list-unstyled" id="pageSubmenu2">
+                <li>
+                  <a href="#">Completed</a>
+                </li>
+                <li>
+                  <a href="#">Uncompleted</a>
+                </li>
+              </ul>
+            </li>
             <li>
               <a href="#">Due Date</a>
             </li>
@@ -63,9 +81,7 @@
       </ul>
     </nav>
 
-    <!-- Page Content  -->
     <div id="content">
-
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
 
@@ -140,6 +156,7 @@
     </div>
   </div>
 
+  <!-- script started -->
   <script>
     const name = localStorage.getItem('name');
     const token = localStorage.getItem('token');
@@ -149,44 +166,46 @@
       $("#sayhii").text(`Hii ${name}`);
       $.ajax({
         method: "GET",
-        url: 'http://localhost:3012/todo',
-        headers: {token}
+        url: 'http://localhost:3013/todo',
+        headers: { token }
       })
-      .done(result => {
-        const name = localStorage.getItem('name');
-        result.todos.forEach(todo => {
-          let date = new Date(todo.dueDate);
-          $("#list").append(`
-            <div class="col-md-4" id="box-card">
+        .done(result => {
+          const name = localStorage.getItem('name');
+          result.todos.forEach(todo => {
+            let date = new Date(todo.dueDate);
+            $("#list").append(`
+            <div class="col-md-4" id="box-card" style="margin-bottom: 15px">
               <div class="card" style="width: 16rem">
                 <div class="card-body">
                   <h5 class="card-title">${todo.name}</h5>
                   <hr>
                   <p class="card-text">Description: ${todo.description}</p>
                   <p class="card-text">Due Date: ${date.getDate()}/${date.getMonth()}/${date.getFullYear()}</p>
-                  <a href="#" class="btn-sm btn-info" onClick="update('${todo._id}', '${todo.name}', '${todo.description}', '${todo.dueDate}')" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">UPDATE</a>
+                  <a href="#" class="btn-sm btn-info" onClick="update('${todo._id}', '${todo.name}', '${todo.description}', '${todo.dueDate}')" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">EDIT</a>
                   <a href="#" class="btn-sm btn-danger" onClick="removeTodo('${todo._id}')">DELETE</a>
+                  <a href="#" class="btn-sm btn-success" onClick="completed('${todo._id}')" >V</a>
+                  <a href="#" class="btn-sm btn-warning" onClick="completed('${todo._id}')" >X</a>
                 </div>
               </div>
               
             </div>
           `)
+          })
         })
-      })
 
-      $("#save").click(() => { 
+      $("#save").click(() => {
         const name = $("#name").val();
         const description = $("#description").val();
         const dueDate = $("#dueDate").val();
         $.ajax({
           method: 'post',
-          url: 'http://localhost:3012/todo',
+          url: 'http://localhost:3013/todo',
           data: { name, description, dueDate, userId: localStorage.getItem('userId') },
           headers: { token }
         })
-        .done(result => {
-          location.reload();
-        })
+          .done(result => {
+            location.reload();
+          })
       })
 
       function update(id, name, description, dueDate) {
@@ -217,7 +236,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary" onClick="submitUpdate('${id}')" id="btn-update">Update</button>
+              <button type="button" class="btn btn-primary" onClick="submitUpdate('${id}')" id="btn-update">Save</button>
             </div>
           `)
       }
@@ -228,36 +247,39 @@
         const dueDate = $("#dueDate").val();
         $.ajax({
           method: 'put',
-          url: `http://localhost:3012/todo/${id}`,
+          url: `http://localhost:3013/todo/${id}`,
           data: { name, description, dueDate }
         })
-        .done(result => {
-          location.reload();
-        })
-      }
-
-      function removeTodo(id) {
-        $.ajax({
-          method: 'delete',
-          url: `http://localhost:3012/todo/${id}`
-        })
-        .done(result => {
-          location.reload();
-        })
-      }
-
-      $("#logout").click(() => {
-        localStorage.removeItem('token')
-      })
-
-      function logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('name');
-        localStorage.removeItem('userId');
-        window.location.href = 'index.html'
+          .done(result => {
+            location.reload();
+          })
       }
 
     }
+
+    function removeTodo(id) {
+      $.ajax({
+        method: 'delete',
+        url: `http://localhost:3013/todo/${id}`
+      })
+        .done(result => {
+          location.reload();
+        })
+    }
+
+    $("#logout").click(() => {
+      localStorage.removeItem('token')
+    })
+
+    function logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('name');
+      localStorage.removeItem('userId');
+      window.location.href = 'index.html'
+    }
+
+    
+
 
   </script>
 

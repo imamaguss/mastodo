@@ -19,6 +19,6 @@ server
   .use('/', indexRoute)
   .use('/users', userRoute)
   .use('/todo', todoRoute)
-  .listen(3012, () => {
+  .listen(3013, () => {
     console.log(`Server running on port 3012`);
   });
